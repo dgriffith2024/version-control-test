@@ -28,11 +28,12 @@ jobs:
         git config user.name "github-actions"
         git config user.email "github-actions@github.com"
         
+        git branch
+        
         git pull origin "${BRANCH_NAME}"
 
         git config pull.rebase false
 
-        git branch
         
         git checkout "${BRANCH_NAME}"
         git add .
