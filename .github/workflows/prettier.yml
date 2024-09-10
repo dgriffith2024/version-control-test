@@ -30,6 +30,8 @@ jobs:
         
         git pull origin "${BRANCH_NAME}"
         
+        git config pull.rebase false
+        
         git checkout "${BRANCH_NAME}"
         git add .
         git commit -m "chore: apply Prettier formatting" || exit 0
@@ -39,7 +41,7 @@ jobs:
         git push origin "${BRANCH_NAME}"
         
         # Configure git to rebase
-        # git config pull.rebase true
+        # git config pull.rebase false
 
         # Ensure the local branch is up-to-date
         # git fetch origin "${BRANCH_NAME}"
