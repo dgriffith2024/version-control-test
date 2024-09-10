@@ -29,8 +29,10 @@ jobs:
         git config user.email "github-actions@github.com"
         
         git pull origin "${BRANCH_NAME}"
-        
+
         git config pull.rebase false
+
+        git branch
         
         git checkout "${BRANCH_NAME}"
         git add .
