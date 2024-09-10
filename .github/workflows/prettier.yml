@@ -31,7 +31,7 @@ jobs:
         # Get the branch name of the PR
         BRANCH_NAME="${GITHUB_HEAD_REF}"
 
-        git push origin "${BRANCH_NAME}"
+        git push origin pre-produccion
         
         # Configure git to rebase
         # git config pull.rebase true
