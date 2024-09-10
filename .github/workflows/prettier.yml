@@ -28,3 +28,11 @@ jobs:
         git add .
         git commit -m "chore: apply Prettier formatting" || exit 0
         git push
+        
+         # Get the branch name of the PR
+        BRANCH_NAME=$(echo "${GITHUB_REF#refs/heads/}")
+
+        # Push changes to the branch
+        git push origin HEAD:${BRANCH_NAME}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
