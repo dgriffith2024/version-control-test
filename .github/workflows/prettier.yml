@@ -30,16 +30,18 @@ jobs:
 
         # Get the branch name of the PR
         BRANCH_NAME="${GITHUB_HEAD_REF}"
+
+        git push origin "${BRANCH_NAME}"
         
         # Configure git to rebase
-        git config pull.rebase true
+        # git config pull.rebase true
 
         # Ensure the local branch is up-to-date
-        git fetch origin "${BRANCH_NAME}"
-        git checkout "${BRANCH_NAME}"
-        git pull origin "${BRANCH_NAME}"
+        # git fetch origin "${BRANCH_NAME}"
+        # git checkout "${BRANCH_NAME}"
+        # git pull origin "${BRANCH_NAME}"
 
         # Push changes to the branch
-        git push origin "${BRANCH_NAME}"
+        # git push origin "${BRANCH_NAME}"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
