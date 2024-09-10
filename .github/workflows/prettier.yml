@@ -23,16 +23,17 @@ jobs:
       
     - name: Commit changes
       run: |
+        BRANCH_NAME="${GITHUB_HEAD_REF}"
+
         git config user.name "github-actions"
         git config user.email "github-actions@github.com"
-        git checkout pre-produccion
+        git checkout "${BRANCH_NAME}"
         git add .
         git commit -m "chore: apply Prettier formatting" || exit 0
 
         # Get the branch name of the PR
-        BRANCH_NAME="${GITHUB_HEAD_REF}"
 
-        git push origin pre-produccion
+        git push origin "${BRANCH_NAME}"
         
         # Configure git to rebase
         # git config pull.rebase true
