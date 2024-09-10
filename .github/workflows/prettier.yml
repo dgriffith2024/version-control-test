@@ -12,46 +12,20 @@ jobs:
     if: github.actor != 'github-actions'
         
     steps:
-    - name: Check out repo
-      uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14.x"
+          
+      - run: npm ci
+      - run: npm run prettier
       
-    - name: Install dependencies
-      run: npm install
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
 
-    - name: Run prettier
-      run: npx prettier --write "src/**/*.{ts,js,json,css,html}"
-      
-    - name: Commit changes
-      run: |
-        BRANCH_NAME="${GITHUB_HEAD_REF}"
-
-        git config user.name "github-actions"
-        git config user.email "github-actions@github.com"
-        
-        git branch
-        
-        git pull origin "${BRANCH_NAME}"
-
-        git config pull.rebase false
-
-        
-        git checkout "${BRANCH_NAME}"
-        git add .
-        git commit -m "chore: apply Prettier formatting" || exit 0
-
-        # Get the branch name of the PR
-
-        git push origin "${BRANCH_NAME}"
-        
-        # Configure git to rebase
-        # git config pull.rebase false
-
-        # Ensure the local branch is up-to-date
-        # git fetch origin "${BRANCH_NAME}"
-        # git checkout "${BRANCH_NAME}"
-        # git pull origin "${BRANCH_NAME}"
-
-        # Push changes to the branch
-        # git push origin "${BRANCH_NAME}"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          commit_message: Apply formatting changes
+          branch: ${{ github.head_ref }}
