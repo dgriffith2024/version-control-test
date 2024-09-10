@@ -30,7 +30,8 @@ jobs:
 
         # Get the branch name of the PR
         BRANCH_NAME=$(echo "${GITHUB_REF#refs/heads/}")
-
+        
+        git config pull.rebase true
         git pull origin HEAD:${BRANCH_NAME}
         
         # Push changes to the branch
