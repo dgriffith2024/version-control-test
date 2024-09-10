@@ -9,6 +9,7 @@ on:
 jobs:
   prettier:
     runs-on: ubuntu-latest
+    if: github.actor != 'github-actions'
         
     steps:
     - name: Check out repo
@@ -19,3 +20,11 @@ jobs:
 
     - name: Run prettier
       run: npx prettier --write "src/**/*.{ts,js,json,css,html}"
+      
+    - name: Commit changes
+      run: |
+        git config user.name "github-actions"
+        git config user.email "github-actions@github.com"
+        git add .
+        git commit -m "chore: apply Prettier formatting" || exit 0
+        git push
