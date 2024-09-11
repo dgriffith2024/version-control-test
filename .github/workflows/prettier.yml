@@ -15,12 +15,12 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
           token: ${{ secrets.WORKFLOW_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
 
       - uses: actions/setup-node@v2
         with:
           token: ${{ secrets.WORKFLOW_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
           node-version: "14.x"
           
       - run: npm i
@@ -30,6 +30,6 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           token: ${{ secrets.WORKFLOW_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
           commit_message: Apply formatting changes
           branch: ${{ github.head_ref }}
